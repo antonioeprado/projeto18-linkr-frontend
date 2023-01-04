@@ -4,17 +4,23 @@ import TimelinePage from "./Pages/TimelinePage";
 import HashTagsPage from "./Pages/HashTagPage";
 
 function App() {
-  return (
-    <>
-      <ResetCss />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/timeline" element={<TimelinePage />} />
-          <Route path="/hashtag/:hashtag" element={<HashTagsPage />} />
-        </Routes>
-      </BrowserRouter>
-    </>
-  );
+	return (
+		<>
+			<ResetCss />
+			<BrowserRouter>
+				<Routes>
+					<Route
+						path='/timeline'
+						element={<TimelinePage />}
+					/>
+					<Route
+						path='/hashtags/:hashtags'
+						element={<HashTagsPage />}
+					/>
+				</Routes>
+			</BrowserRouter>
+		</>
+	);
 }
 
 export default App;

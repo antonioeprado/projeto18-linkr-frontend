@@ -3,7 +3,6 @@ import styled from "styled-components";
 import Header from "../Components/Constants/Header";
 import Post from "../Components/TimelinePage/Post";
 import Trending from "../Components/TimelinePage/Trending";
-import { useParams } from "react-router-dom";
 
 export default function HashTagsPage() {
 	const { hashtag } = useParams();

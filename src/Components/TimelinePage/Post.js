@@ -43,27 +43,36 @@ export default function Post() {
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState(false);
 
+	const [posts, setPosts] = useState([]);
+	const [loading, setLoading] = useState(false);
+	const [error, setError] = useState(false);
+
 	const tagStyle = {
 		color: "white",
 		fontWeight: 800,
 		cursor: "pointer",
 	};
 
-	/*   useEffect((()=>{
+	//https://linkr-api-9ik9.onrender.com/
 
-    axios.get("https://linkr-api-9ik9.onrender.com/posts")
-    .then(a=>{setPosts(a.data)})
-    .catch(e=>{
-      setError(true)
-      console.log(e.response.data)
-    })
-  }),[]) */
+	useEffect(() => {
+		axios
+			.get("http://localhost:4000/all-posts")
+			.then((a) => {
+				console.log(a.data);
+				setPosts(a.data);
+			})
+			.catch((e) => {
+				setError(true);
+				console.log(e);
+			});
+	}, []);
 
 	return (
 		<>
 			{posts.length > 0 && !error && !loading && (
 				<>
-					{postsExample.map((e, i) => (
+					{posts.map((e, i) => (
 						<PostStyle key={i}>
 							<LeftContainer>
 								<UserProfilePicture

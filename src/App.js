@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import TimelinePage from "./Pages/TimelinePage";
 import HashTagsPage from "./Pages/HashTagPage";
 import SignInPage from "./Pages/SignInPage";
+import SignUpPage from "./Pages/SignUpPage";
 
 function App() {
 	return (
@@ -21,6 +22,10 @@ function App() {
 					<Route
 						path='/sign-in'
 						element={<SignInPage />}
+					/>
+					<Route
+						path='/sign-up'
+						element={<SignUpPage />}
 					/>
 				</Routes>
 			</BrowserRouter>

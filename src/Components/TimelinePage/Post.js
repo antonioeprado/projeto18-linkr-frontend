@@ -6,13 +6,9 @@ import { useEffect, useState } from "react";
 import { ReactTagify } from "react-tagify";
 import { useNavigate } from "react-router-dom";
 
-export default function Post() {
-	const [posts, setPosts] = useState(["projetao"]);
-	const [loading, setLoading] = useState(false);
-	const [error, setError] = useState(false);
-
+export default function Post({ loading, setLoading }) {
+	const navigate = useNavigate();
 	const [posts, setPosts] = useState([]);
-	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(false);
 
 	const tagStyle = {
@@ -36,7 +32,7 @@ export default function Post() {
 				setError(true);
 				console.log(e);
 			});
-	}, []);
+	}, [setPosts, loading, setLoading]);
 
 	return (
 		<>

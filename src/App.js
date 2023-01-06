@@ -20,7 +20,7 @@ function App() {
 						element={<HashTagsPage />}
 					/>
 					<Route
-						path='/sign-in'
+						path='/'
 						element={<SignInPage />}
 					/>
 					<Route

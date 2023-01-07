@@ -11,11 +11,20 @@ export default function Post({ loading, setLoading }) {
 	const [posts, setPosts] = useState([]);
 	const [error, setError] = useState(false);
 
-	const tagStyle = {
-		color: "white",
-		fontWeight: 800,
-		cursor: "pointer",
-	};
+	useEffect(() => {
+		axios
+			.get("http://localhost:4000/all-posts")
+			.then((a) => {
+				console.log(a.data);
+				setLoading(false);
+				setPosts(a.data);
+			})
+			.catch((e) => {
+				setLoading(false);
+				setError(true);
+				console.log(e);
+			});
+	}, [loading]);
 
 	//https://linkr-api-9ik9.onrender.com/
 

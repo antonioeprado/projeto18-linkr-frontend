@@ -3,6 +3,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { useForm } from "../Components/Form/useForm";
 import axios from "axios";
 import { useState } from "react";
+import { useToken } from "../Contexts/Token";
 
 export default function SignUp() {
   const [form, handleForm] = useForm({
@@ -12,8 +13,16 @@ export default function SignUp() {
     pictureUrl: "",
   });
   const [loading, setLoading] = useState(false);
-
+  const { setToken } = useToken();
   const navigate = useNavigate();
+
+  const isLogged = localStorage.getItem("data");
+  if (isLogged) {
+    const data = JSON.parse(isLogged);
+    setToken(data);
+    navigate("/timeline");
+    return;
+  }
 
   function register(event) {
     event.preventDefault();

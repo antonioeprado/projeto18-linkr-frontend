@@ -1,15 +1,16 @@
-import { useContext, useEffect, useState } from "react";
+import {  useEffect, useState } from "react";
 import { DebounceInput } from "react-debounce-input";
 import { AiOutlineSearch } from "react-icons/ai";
 import styled from "styled-components";
 import axios from "axios";
-import { AuthContext } from "../Context/authContext";
+import { useToken } from "../../Contexts/Token";
+
 
 function Searchbox() {
 	const [search, setSearch] = useState("");
 	const [result, setResult] = useState([]);
 
-	const { token } = useContext(AuthContext);
+	const { token, setToken } = useToken();
 
 	useEffect(() => {
 		if (search.length !== 0) {

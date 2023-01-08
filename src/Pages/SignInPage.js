@@ -2,14 +2,22 @@ import * as S from "../Assets/authStyle";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "../Components/Form/useForm";
 import axios from "axios";
-import { useContext, useState } from "react";
-import { AuthContext } from "../Components/Context/authContext";
+import { useState } from "react";
+import { useToken } from "../Contexts/Token";
 
 export default function SignIn() {
   const [form, handleForm] = useForm({ email: "", password: "" });
   const navigate = useNavigate();
-  const { token, setToken, setAndPersistToken } = useContext(AuthContext);
   const [loading, setLoading] = useState(false);
+  const { setToken } = useToken();
+
+  const isLogged = localStorage.getItem("data");
+  if (isLogged) {
+    const data = JSON.parse(isLogged);
+    setToken(data);
+    navigate("/timeline");
+    return;
+  }
 
   function login(event) {
     event.preventDefault();
@@ -23,9 +31,10 @@ export default function SignIn() {
 
       promise.then((res) => {
         navigate("/timeline");
-        setAndPersistToken(res.data);
+        setToken(res.data);
+        const serialized = JSON.stringify(res.data);
+        localStorage.setItem("data", serialized);
         setLoading(false);
-        console.log(res.data);
       });
 
       promise.catch((err) => {

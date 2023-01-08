@@ -2,14 +2,14 @@ import styled from "styled-components";
 import { AiOutlineDown, AiOutlineUp } from "react-icons/ai";
 import Searchbox from "./Searchbox";
 import useWindowDimensions from "../Services/windowDimensions";
-import { AuthContext } from "../../Components/Context/authContext";
 import jwtDecode from "jwt-decode";
-import { useContext, useState } from "react";
+import {  useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useToken } from "../../Contexts/Token";
 
 export default function Header() {
   const { width } = useWindowDimensions();
-  const { token } = useContext(AuthContext);
+  const { token } = useToken();
   const [showLogout, setShowLogout] = useState(false);
   const navigate = useNavigate();
 

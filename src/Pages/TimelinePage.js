@@ -5,10 +5,22 @@ import Post from "../Components/TimelinePage/Post";
 import useWindowDimensions from "../Components/Services/windowDimensions";
 import Searchbox from "../Components/Constants/Searchbox";
 import { useState } from "react";
+import { useToken } from "../Contexts/Token";
+import { useNavigate } from "react-router-dom";
+import jwtDecode from "jwt-decode";
 
 export default function TimelinePage() {
   const [loading, setLoading] = useState(false);
   const { width } = useWindowDimensions();
+  const {setToken, token} = useToken();
+  const navigate = useNavigate();
+  const isLogged = localStorage.getItem("data");
+  if (!isLogged) {
+    navigate("/");
+    return;
+  }
+  setToken(isLogged)
+  const userInfo = jwtDecode(token)
   return (
     <>
       <Header />

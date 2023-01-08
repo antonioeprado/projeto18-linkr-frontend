@@ -4,21 +4,21 @@ import TimelinePage from "./Pages/TimelinePage";
 import HashTagsPage from "./Pages/HashTagPage";
 import SignInPage from "./Pages/SignInPage";
 import SignUpPage from "./Pages/SignUpPage";
-import Context from "./Components/Context/authContext";
+import TokenProvider from "./Contexts/Token";
 
 function App() {
   return (
     <>
       <ResetCss />
       <BrowserRouter>
-        <Context>
+        <TokenProvider>
           <Routes>
             <Route path="/timeline" element={<TimelinePage />} />
             <Route path="/hashtag/:hashtag" element={<HashTagsPage />} />
             <Route path="/" element={<SignInPage />} />
             <Route path="/sign-up" element={<SignUpPage />} />
           </Routes>
-        </Context>
+        </TokenProvider>
       </BrowserRouter>
     </>
   );

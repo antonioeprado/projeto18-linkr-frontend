@@ -6,14 +6,13 @@ import { useEffect, useState } from "react";
 import { ReactTagify } from "react-tagify";
 import { useNavigate } from "react-router-dom";
 import { postLikeFunction, dislikeFunction } from "../Services/LikeFunctions";
-import { useContext } from "react";
-import { AuthContext } from "../Context/authContext";
 import jwtDecode from "jwt-decode";
 import {
   LoadingMessage,
   NoPostsMessage,
   ErrorMessage,
 } from "./SmallComponents/AlternativeMessages";
+import { useToken } from "../../Contexts/Token";
 
 export default function Post({ loading, setLoading }) {
   const navigate = useNavigate();
@@ -21,7 +20,7 @@ export default function Post({ loading, setLoading }) {
   const [error, setError] = useState(false);
   const [liked, setLiked] = useState([]);
   const [disabled, setDisabled] = useState(false);
-  const { token } = useContext(AuthContext);
+  const { token, setToken } = useToken();
   const { userId } = jwtDecode(token);
 
   const tagStyle = {
@@ -31,7 +30,7 @@ export default function Post({ loading, setLoading }) {
   };
 
   //https://linkr-api-9ik9.onrender.com/
-/* 
+   
   useEffect(() => {
     axios
       .get("http://localhost:4000/all-posts")
@@ -45,7 +44,7 @@ export default function Post({ loading, setLoading }) {
         setError(true);
         console.log(e);
       });
-  }, []); */
+  }, []); 
 
   //se e.likedBy.length > 0, procura o id do user com: e.likedBy.find((l) => l.userId === userId) pra poder mostrar vermelho
 

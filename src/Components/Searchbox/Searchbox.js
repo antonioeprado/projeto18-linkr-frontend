@@ -24,8 +24,6 @@ function Searchbox() {
   const { userId } = jwtDecode(token);
   const navigate = useNavigate();
 
-  console.log(followers);
-
   useEffect(() => {
     if (search.length >= 3) {
       const config = {
@@ -37,13 +35,14 @@ function Searchbox() {
 
       axios(`http://localhost:4000/user?username=${search}`, config)
         .then((res) => {
-          res.data.forEach((user) => {
+          const followersArray = res.data.filter((user) => {
             if (!followers.includes(user.id)) {
               if (user.followedBy?.includes(Number(userId))) {
-                setFollowers([...followers, user.id]);
+                return user.id;
               }
             }
           });
+          setFollowers(followersArray.map((user) => user.id));
           setResult(res.data);
         })
         .catch((err) => console.log(err));
